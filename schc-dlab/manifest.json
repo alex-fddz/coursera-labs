@@ -5,5 +5,15 @@
     {
       "path": "/home/coder/coursera"
     }
+  ],
+  "additionalRunParams": [
+    {
+      "param": "--privileged",
+      "value": ""
+    },
+    {
+      "param": "--hostname",
+      "value": "schc-dlab"
+    }
   ]
 }
