@@ -14,6 +14,10 @@
     {
       "param": "--hostname",
       "value": "schc-dlab"
+    },
+    {
+      "param": "--rm",
+      "value": ""
     }
   ]
 }

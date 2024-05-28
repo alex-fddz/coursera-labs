@@ -14,6 +14,7 @@ docker run \
   -e HOME=$HOME \
   -v $HOME/.coursera:$HOME/.coursera \
   -it \
+  --rm \
   run-lab python3 coursera-lab.py $ACTION $BUILD_PATH $ADD_SUBMIT_BUTTON
 else 
   docker run -it run-lab python3 coursera-lab.py '--help'
