@@ -112,27 +112,31 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC
     rm -f protoc-${PROTOC_VERSION}-linux-x86_64.zip
 
 ## ============================ SCHC Docker Lab =======================
-RUN apt-get install -y nano vim x11-xserver-utils
+WORKDIR ${HOME}
+
+# install utils and openschc requirements
+RUN apt-get install -y x11-xserver-utils nano vim mousepad
 RUN pip install scapy cbor2 netifaces
+# setup CORE scenario and terminal configs
 COPY ./configs/schc-ping.xml ${HOME}/.coregui/xmls/schc-ping.xml
 COPY ./configs/bash-config ${HOME}/bash-config
-#RUN cat ${HOME}/bash-config >> ${HOME}/.bashrc && rm ${HOME}/bash-config
-#COPY ./configs/xterm-config ${HOME}/.Xresources
+RUN cat ${HOME}/bash-config >> /root/.bashrc && rm ${HOME}/bash-config
+RUN echo 'alias sudop="sudo env PATH=$PATH"' >> ${HOME}/.bashrc
+RUN sudo chown -R ${USER}:${USER} ${HOME}/.coregui
 
 #################################
 ### VNC ####
 #################################
-WORKDIR ${HOME}
 
+WORKDIR ${HOME}
 USER ${USER}
 
 ENTRYPOINT ["/dockerstartup/vnc_startup.sh"]
-
-COPY --chown=${USER}:${USER} desktop-apps/ ${HOME}/Desktop/
 
 # For local M1+ Mac testing
 # RUN mkdir -p ~/.config/Code/User/ && echo '{"extensions.verifySignature": false}' > ~/.config/Code/User/settings.json
 
 # Create desktop icons
 COPY --chown=${USER}:${USER} desktop-apps/ ${HOME}/Desktop/
-#RUN chmod 755 ${HOME}/Desktop/Chromium.desktop ${HOME}/Desktop/VSCode.desktop ${HOME}/Desktop/Eclipse.desktop ${HOME}/Desktop/IntelliJ.desktop ${HOME}/Desktop/Wireshark.desktop
+RUN chmod 755 ${HOME}/Desktop/Chromium.desktop ${HOME}/Desktop/VSCode.desktop ${HOME}/Desktop/Wireshark.desktop ${HOME}/Desktop/CORE.desktop 
+
