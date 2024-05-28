@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CORE Emulator
+Comment=CORE: Common Open Research Emulator
+Exec=core-gui
+Icon=/home/coder/Desktop/.core-icon.png
+Terminal=false
+StartupNotify=true
+Categories=Network;Development;
