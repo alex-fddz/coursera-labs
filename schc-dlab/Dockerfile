@@ -123,6 +123,10 @@ COPY ./configs/bash-config ${HOME}/bash-config
 RUN cat ${HOME}/bash-config >> /root/.bashrc && rm ${HOME}/bash-config
 RUN echo 'alias sudop="sudo env PATH=$PATH"' >> ${HOME}/.bashrc
 RUN sudo chown -R ${USER}:${USER} ${HOME}/.coregui
+# add schc-wg wallpaper
+COPY --chown=${USER}:${USER} ./configs/schc-bg.png /usr/share/backgrounds/schc-bg.png
+COPY --chown=${USER}:${USER} ./configs/xfce4-desktop.xml ${HOME}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+
 
 #################################
 ### VNC ####
